@@ -1,0 +1,97 @@
+{
+  "name": "web3.storage",
+  "version": "3.3.2",
+  "description": "API client for web3.storage",
+  "type": "module",
+  "license": "(Apache-2.0 AND MIT)",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/web3-storage/web3.storage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web3-storage/web3.storage/issues"
+  },
+  "homepage": "https://github.com/web3-storage/web3.storage#readme",
+  "scripts": {
+    "test": "npm-run-all -p -r mock:api test:all",
+    "test:all": "run-s test:web test:cjs test:esm test:size",
+    "test:size": "bundlesize",
+    "test:web": "API_PORT=1337 playwright-test test/*.spec.js",
+    "test:cjs": "API_PORT=1337 mocha dist/test/*.spec.cjs --exit",
+    "test:esm": "API_PORT=1337 hundreds mocha test/*.spec.js --exit",
+    "mock:api": "smoke -p 1337 --hooks test/mocks/hooks.js test/mocks/api",
+    "build": "run-s clean build:*",
+    "build:cjs": "rollup --config --silent rollup.config.js",
+    "build:esm": "rollup --config rollup.esm.config.js",
+    "build:tsc": "tsc --build",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && npx codecov",
+    "typedoc": "typedoc --entryPoints src  --out ../../docs/client",
+    "prepare": "npm run build",
+    "clean": "del dist"
+  },
+  "dependencies": {
+    "@ipld/car": "^3.1.4",
+    "@web-std/blob": "^2.1.0",
+    "@web-std/fetch": "^2.0.2",
+    "@web-std/file": "^1.1.0",
+    "browser-readablestream-to-it": "^1.0.2",
+    "carbites": "^1.0.6",
+    "files-from-path": "^0.2.1",
+    "ipfs-car": "^0.5.8",
+    "p-retry": "^4.5.0",
+    "parse-link-header": "^1.0.1",
+    "streaming-iterables": "^6.0.0"
+  },
+  "devDependencies": {
+    "@ipld/dag-json": "^8.0.0",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@types/mocha": "8.2.2",
+    "@types/parse-link-header": "^1.0.0",
+    "bundlesize": "^0.18.1",
+    "cors": "^2.8.5",
+    "del-cli": "^4.0.0",
+    "hundreds": "0.0.9",
+    "mocha": "8.3.2",
+    "multiformats": "^9.1.2",
+    "npm-run-all": "^4.1.5",
+    "nyc": "15.1.0",
+    "playwright-test": "^7.0.1",
+    "rollup": "2.50.1",
+    "rollup-plugin-multi-input": "1.3.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "smoke": "^3.1.1",
+    "typedoc": "0.20.36",
+    "uvu": "0.5.1"
+  },
+  "types": "./dist/src/lib.d.ts",
+  "module": "./src/lib.js",
+  "main": "./dist/src/lib.cjs",
+  "exports": {
+    ".": {
+      "browser": "./src/lib.js",
+      "require": "./dist/src/lib.cjs",
+      "node": "./src/lib.js"
+    },
+    "./src/platform.js": {
+      "browser": "./src/platform.web.js",
+      "require": "./dist/src/platform.cjs",
+      "node": "./src/platform.js"
+    }
+  },
+  "browser": {
+    "./src/platform.js": "./src/platform.web.js"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/bundle.esm.min.js",
+      "maxSize": "200 kB"
+    }
+  ],
+  "files": [
+    "src",
+    "!src/test",
+    "dist",
+    "!dist/test"
+  ]
+}
