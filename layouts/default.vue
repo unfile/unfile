@@ -12,18 +12,18 @@
             class="
               rounded-full
               font-bold
-              text-blue-500
               px-4
               py-2
               transition
               duration-300
               ease-in-out
-              hover:bg-blue-500
-              hover:text-white
+              betterhover:hover:bg-blue-500
+              betterhover:hover:text-white
               mx-1
               whitespace-nowrap
               text-sm
             "
+            :class="$route.name=='faq'?'bg-blue-500 text-white':'text-blue-500'"
             >How it works</n-link
           >
           <n-link
@@ -31,17 +31,17 @@
             class="
               rounded-full
               font-bold
-              text-blue-500
               px-4
               py-2
               transition
               duration-300
               ease-in-out
-              hover:bg-blue-500
-              hover:text-white
+              betterhover:hover:bg-blue-500
+              betterhover:hover:text-white
               mx-1
               text-sm
             "
+            :class="$route.name=='donate'?'bg-blue-500 text-white':'text-blue-500'"
             >Donate</n-link
           >
           <a
