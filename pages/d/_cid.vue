@@ -335,7 +335,7 @@
           <Spinner v-else-if="status && files.length < 1" class="flex-1" />
         </transition>
       </div>
-      <div v-else class="text-center text-xl text-red-600">{{ error }}</div>
+      <div v-else class="text-center text-xl text-red-600 break-all">{{ error }}</div>
       <Modal :message="errorModal" v-show="errorModal" @ok="errorModal = ''" />
     </div>
   </div>
