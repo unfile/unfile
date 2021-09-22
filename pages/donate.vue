@@ -98,6 +98,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `UnFile - Donation`,
+    }
+  },
   data() {
     return {
       btcQR: false,

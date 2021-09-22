@@ -199,6 +199,7 @@
                   flex
                   justify-center
                   items-center
+                  bg-white
                 "
                 title="Send tip to the person who uploaded these files"
                 :class="

@@ -1,10 +1,10 @@
 <template>
   <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl">
     <div class="text-center" v-if="selectedFiles.length < 1 && !encrypting">
-      <p class="mb-5 text-sm text-gray-400">
+      <h1 class="mb-5 text-sm text-gray-400">
         Your files will be encrypted locally on your device then sent to a
         decentralized storage.
-      </p>
+      </h1>
     </div>
     <form class="space-y-3">
       <div class="grid grid-cols-1 space-y-2">

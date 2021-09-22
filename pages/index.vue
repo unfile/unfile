@@ -39,6 +39,11 @@
 <script>
 import { storeFiles } from '~/utils/storage'
 export default {
+  head() {
+    return {
+      title: `UnFile - Upload Your Files`,
+    }
+  },
   data() {
     return {
       showProgress: false,
