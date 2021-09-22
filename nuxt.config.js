@@ -3,6 +3,7 @@ import pkg from './package.json'
 export default {
   target: 'static',
   ssr: false,
+  modern:'client',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
