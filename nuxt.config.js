@@ -17,12 +17,20 @@ export default {
           'Decentralized & encrypted free file storing and sharing built on Filecoin and IPFS',
       },
       { name: 'format-detection', content: 'telephone=no' },
-      { hid: 'og:image', property: 'og:image', content:'https://unfile.io/icon.png'},
-      { hid: 'og:image:secure_url', property: 'og:image:secure_url', content:'https://unfile.io/icon.png'},
-      { hid: 'og:image:type', property: 'og:image:type', content:'image/png'},
-      { hid: 'og:image:width', property: 'og:image:width', content:'512'},
-      { hid: 'og:image:height', property: 'og:image:height', content:'512'},
-      { hid: 'og:image:alt', property: 'og:image:alt', content:'UnFile logo'},
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://unfile.io/icon.png',
+      },
+      {
+        hid: 'og:image:secure_url',
+        property: 'og:image:secure_url',
+        content: 'https://unfile.io/icon.png',
+      },
+      { hid: 'og:image:type', property: 'og:image:type', content: 'image/png' },
+      { hid: 'og:image:width', property: 'og:image:width', content: '512' },
+      { hid: 'og:image:height', property: 'og:image:height', content: '512' },
+      { hid: 'og:image:alt', property: 'og:image:alt', content: 'UnFile logo' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -47,6 +55,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/sitemap',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -65,7 +74,13 @@ export default {
   publicRuntimeConfig: {
     clientVersion: pkg.version,
   },
-  generate:{
-    fallback: true
-  }
+  generate: {
+    fallback: true,
+  },
+  sitemap: {
+    hostname: 'https://unfile.io',
+    gzip: true,
+    exclude: ['/d', '/d/**'],
+    routes: ['/donate', '/faq'],
+  },
 }
