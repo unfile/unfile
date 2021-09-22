@@ -19,7 +19,7 @@
               ease-in-out
               betterhover:hover:bg-blue-500
               betterhover:hover:text-white
-              mx-1
+              mr-1
               whitespace-nowrap
               text-sm
             "
@@ -38,7 +38,7 @@
               ease-in-out
               betterhover:hover:bg-blue-500
               betterhover:hover:text-white
-              mx-1
+              mr-1
               text-sm
             "
             :class="$route.name=='donate'?'bg-blue-500 text-white':'text-blue-500'"
@@ -50,8 +50,8 @@
             class="
               px-4
               py-2
-              mx-1
             "
+            title="View source code"
             ><GithubIcon class=""/></a>
         </div>
       </div>
