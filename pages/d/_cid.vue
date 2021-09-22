@@ -65,6 +65,7 @@
                 type="text"
                 required
                 v-model="dKey"
+                :disabled="files.length < 1"
               />
               <div class="flex-shrink-0">
                 <button
@@ -72,23 +73,21 @@
                     w-full
                     flex
                     justify-center
-                    bg-blue-500
-                    text-gray-100
                     tracking-wide
                     font-semibold
-                    focus:outline-none
-                    focus:shadow-outline
-                    hover:bg-blue-600
                     shadow-lg
                     cursor-pointer
-                    transition
-                    ease-in
-                    duration-300
                     py-2
                     px-4
                     rounded-lg
                   "
+                  :class="
+                    files.length < 1
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed	shadow'
+                      : 'bg-blue-500 text-gray-100 focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300'
+                  "
                   type="submit"
+                  :disabled="files.length < 1"
                 >
                   🔑Verify
                 </button>
@@ -232,12 +231,12 @@
           leave-class="opacity-100 transform scale-100"
           leave-to-class="opacity-0 transform scale-0"
         >
-        <div v-if="!status" class="flex flex-col justify-center items-center">
-          <h1 class="text-center mb-3 text-lg text-gray-600 font-semibold">
-            Finding your files..
-          </h1>
-          <Spinner />
-        </div>
+          <div v-if="!status" class="flex flex-col justify-center items-center">
+            <h1 class="text-center mb-3 text-lg text-gray-600 font-semibold">
+              Finding your files..
+            </h1>
+            <Spinner />
+          </div>
         </transition>
         <transition
           enter-active-class="transition-all delay-1000 duration-1000 ease"
@@ -247,7 +246,11 @@
           leave-class="opacity-100 transform scale-100"
           leave-to-class="opacity-0 transform scale-0"
         >
-          <div v-if="files.length > 0" class="self-start mt-5" :class="{'flex-1':metadata}">
+          <div
+            v-if="files.length > 0"
+            class="self-start mt-5"
+            :class="{ 'flex-1': metadata }"
+          >
             <h1
               class="text-lg font-bold text-center text-gray-600 mb-3"
               v-if="metadata"
