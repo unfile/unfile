@@ -335,7 +335,7 @@
           <Spinner v-else-if="status && files.length < 1" class="flex-1" />
         </transition>
       </div>
-      <div v-else class="text-center text-xl text-red-600 break-all">{{ error }}</div>
+      <div v-else class="text-center text-xl break-words" v-html="error"></div>
       <Modal :message="errorModal" v-show="errorModal" @ok="errorModal = ''" />
     </div>
   </div>
@@ -368,7 +368,7 @@ export default {
       await this.getFilesList()
     } catch (e) {
       console.error(e)
-      this.error = `Unable to get status for CID: ${this.$route.params.cid}, please make sure your url is correct.`
+      this.error = `Unable to get status for CID: <br><span class="break-all text-red-600">${this.$route.params.cid}</span><br> please make sure your url is correct.`
     }
     if (this.dKey) {
       this.getDetails()

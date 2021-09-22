@@ -22,7 +22,7 @@
         <button class="text-black close-modal" @click="close">&cross;</button>
       </div>
       <!-- modal body -->
-      <div class="px-10 py-5">
+      <div class="px-10 py-5 break-words">
         {{ message }}
       </div>
       <div class="flex justify-end items-center w-100 px-10 pb-5">
