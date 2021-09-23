@@ -88,9 +88,11 @@
                   "
                   type="submit"
                   :disabled="files.length < 1"
+                  v-if="!loadingDetails"
                 >
                   🔑Verify
                 </button>
+                <Spinner class="h-1 w-1" v-else />
               </div>
             </div>
           </form>
@@ -363,6 +365,7 @@ export default {
       showQR: false,
       error: '',
       errorModal: '',
+      loadingDetails: false,
     }
   },
   async mounted() {
@@ -379,6 +382,7 @@ export default {
   },
   methods: {
     async getDetails() {
+      this.loadingDetails = true
       let encryptedBlob
       try {
         encryptedBlob = await getEncryptedMetadata(this.$route.params.cid)
@@ -390,6 +394,7 @@ export default {
       } catch (e) {
         this.errorModal = `Unable to decrypt, please check if your key is correct.`
       }
+      this.loadingDetails = false
     },
     async decryptMetadata(encryptedBlob) {
       let blob = await decryptBlob(encryptedBlob, this.dKey)
