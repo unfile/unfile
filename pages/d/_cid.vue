@@ -475,6 +475,8 @@ export default {
       let uploads = localStorage.getItem('unfile-uploads')
       if (uploads) {
         uploads = JSON.parse(uploads) || []
+      }else{
+        uploads = []
       }
       uploads.unshift({
         caption: this.metadata.caption || '',
