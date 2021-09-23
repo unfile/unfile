@@ -27,7 +27,17 @@
         >
           <div
             v-if="status && metadata"
-            class="sm:px-4 md:px-16 lg:px-24 w-full space-y-2 mb-4"
+            class="
+              sm:px-4
+              md:px-16
+              lg:px-24
+              w-full
+              space-y-2
+              mb-4
+              flex flex-wrap
+              items-center
+              justify-between
+            "
           >
             <p
               class="
@@ -41,6 +51,31 @@
             >
               Key accepted&nbsp;<CheckIcon class="w-5 h-5" />
             </p>
+            <button
+              class="
+                flex
+                justify-center
+                cursor-pointer
+                py-1
+                px-2
+                rounded-lg
+                bg-blue-500
+                text-gray-100
+                focus:outline-none
+                focus:shadow-outline
+                hover:bg-blue-600
+                shadow-lg
+                cursor-pointer
+                transition
+                ease-in
+                duration-300
+                text-sm
+              "
+              @click="saveLink"
+              :disabled="saveText=='Link Saved!'"
+            >
+              {{saveText}}
+            </button>
           </div>
           <form
             @submit.prevent="getDetails"
@@ -75,7 +110,6 @@
                     justify-center
                     tracking-wide
                     font-semibold
-                    shadow-lg
                     cursor-pointer
                     py-2
                     px-4
@@ -366,6 +400,7 @@ export default {
       error: '',
       errorModal: '',
       loadingDetails: false,
+      saveText:'Save Link in My Files'
     }
   },
   async mounted() {
@@ -435,6 +470,18 @@ export default {
     },
     updateProgress(index, progress) {
       this.$set(this.files[index], 'progress', Number(progress.toFixed(2)))
+    },
+    saveLink() {
+      let uploads = localStorage.getItem('unfile-uploads')
+      if (uploads) {
+        uploads = JSON.parse(uploads) || []
+      }
+      uploads.unshift({
+        caption: this.metadata.caption || '',
+        link: window.location.pathname + `?key=${this.dKey}`,
+      })
+      localStorage.setItem('unfile-uploads', JSON.stringify(uploads))
+      this.saveText = 'Link Saved!'
     },
   },
   filters: {
