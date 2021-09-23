@@ -59,6 +59,33 @@
             </button>
           </div>
         </div>
+        <div class="flex justify-center">
+        <button
+          class="
+            mt-10
+            flex
+            justify-center
+            py-2
+            px-4
+            tracking-wide
+            font-semibold
+            rounded-xl
+            bg-blue-500
+            text-gray-100
+            focus:outline-none
+            focus:shadow-outline
+            hover:bg-blue-600
+            shadow-lg
+            cursor-pointer
+            transition
+            ease-in
+            duration-300
+          "
+          @click="saveLink"
+        >
+          Save Link in Browser Storage
+        </button>
+        </div>
       </div>
     </transition>
   </div>
@@ -81,6 +108,9 @@ export default {
     cid: {
       type: String,
     },
+    caption: {
+      type: String,
+    },
   },
   computed: {
     link() {
@@ -101,6 +131,15 @@ export default {
       setTimeout(() => {
         this.copyBtnText = 'Copy'
       }, 1000)
+    },
+    saveLink() {
+      let uploads = localStorage.getItem('unfile-uploads') 
+      if(uploads){
+        uploads = JSON.parse(uploads) || []
+      }
+      uploads.unshift({ caption: this.caption||'', link: this.combinedLink })
+      localStorage.setItem('unfile-uploads', JSON.stringify(uploads))
+      this.$router.push('/myfiles')
     },
   },
 }

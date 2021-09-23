@@ -35,7 +35,7 @@
           <a href="https://ipfs.io/" target="_external" class="text-blue-500"
             >IPFS</a
           >. Your files are distributed on a decentralized network making it
-          censorship resistant. It's also <b>FREE</b> and unlimited.
+          censorship resistant. It's also <b>FREE</b>, opensource and unlimited.
         </li>
         <li class="mt-5"><b>Q:</b> Can you open my files?</li>
         <li>

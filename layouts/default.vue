@@ -1,11 +1,11 @@
 <template>
   <div class="bg-gray-100 min-h-screen">
     <div class="relative top-0 z-10 w-full">
-      <div class="flex justify-center px-10 py-5">
-        <n-link to="/" class="mr-auto font-bold text-xl px-4 py-2"
+      <div class="flex justify-between items-center px-5 lg:px-10 py-5">
+        <n-link to="/" class="font-bold text-xl px-4 py-2"
           >UnFile</n-link
         >
-        <div class="flex items-center items-center ml-auto">
+        <div class="flex justify-center items-center">
           
           <n-link
             to="/faq"
@@ -20,8 +20,8 @@
               betterhover:hover:bg-blue-500
               betterhover:hover:text-white
               mr-1
-              whitespace-nowrap
               text-sm
+              text-center
             "
             :class="$route.name=='faq'?'bg-blue-500 text-white':'text-blue-500'"
             >How it works</n-link
@@ -40,19 +40,29 @@
               betterhover:hover:text-white
               mr-1
               text-sm
+              text-center
             "
             :class="$route.name=='donate'?'bg-blue-500 text-white':'text-blue-500'"
             >Donate</n-link
           >
-          <a
-            href="https://github.com/unfile/unfile"
-            target="_external"
+          <n-link
+            to="/myfiles"
             class="
+              rounded-full
+              font-bold
               px-4
               py-2
+              transition
+              duration-300
+              ease-in-out
+              betterhover:hover:bg-blue-500
+              betterhover:hover:text-white
+              text-sm
+              text-center
             "
-            title="View source code"
-            ><GithubIcon class=""/></a>
+            :class="$route.name=='myfiles'?'bg-blue-500 text-white':'text-blue-500'"
+            >My Files</n-link
+          >
         </div>
       </div>
     </div>
@@ -80,8 +90,17 @@
       <Spinner />
     </div>
     <div class="relative top-0 z-10 w-full">
-      <div class="flex justify-start px-10 py-5">
+      <div class="flex justify-start items-center px-10 py-5">
         <p class="text-gray-400">v{{ $config.clientVersion }}</p>
+        <a
+            href="https://github.com/unfile/unfile"
+            target="_external"
+            class="
+              px-4
+              py-2
+            "
+            title="View source code"
+            ><GithubIcon class=""/></a>
       </div>
     </div>
   </div>

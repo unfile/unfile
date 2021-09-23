@@ -31,6 +31,7 @@
         :password="password"
         :pct="pct"
         :cid="cid"
+        :caption="caption"
       />
     </transition>
   </div>
@@ -50,11 +51,13 @@ export default {
       password: '',
       pct: 0,
       cid: '',
+      caption:''
     }
   },
   methods: {
     async startUpload(data) {
       this.showProgress = true
+      this.caption = data.caption||''
       const cid = await storeFiles(
         data.files,
         data.password,
