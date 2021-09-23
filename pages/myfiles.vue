@@ -21,7 +21,6 @@
           No links are saved in your browser
         </h1>
         <n-link
-        
           class="
             mt-10
             md:w-1/2
@@ -64,7 +63,9 @@
           "
         >
           <div class="mx-2 break-words font-bold">{{ f.caption }}</div>
-          <div class="break-all mx-2 text-sm select-all">{{ f.link }}</div>
+          <div class="break-all mx-2 text-sm select-all">
+            {{ baseUrl }}{{ f.link }}
+          </div>
           <button
             class="
               bg-blue-500
@@ -132,6 +133,11 @@ export default {
     return {
       uploads: [],
     }
+  },
+  computed: {
+    baseUrl() {
+      return window.location.origin
+    },
   },
   mounted() {
     let uploads = localStorage.getItem('unfile-uploads')
