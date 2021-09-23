@@ -48,6 +48,10 @@
         </n-link>
       </div>
       <div class="flex flex-col items-center justify-center" v-else>
+        <h1 class="mb-5 text-gray-500">
+          These links are saved in your browser's local storage. Clearing application's cache
+          will remove them.
+        </h1>
         <div
           v-for="(f, i) in uploads"
           :key="i"
@@ -62,7 +66,7 @@
             w-full
           "
         >
-          <div class="mx-2 break-words font-bold">{{ f.caption }}</div>
+          <div class="mx-2 break-words font-bold text-gray-600">{{ f.caption }}</div>
           <div class="break-all mx-2 text-sm select-all">
             {{ baseUrl }}{{ f.link }}
           </div>
