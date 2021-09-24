@@ -228,10 +228,11 @@
           <img
             :src="require(`@/assets/img/${validAddress}.svg`)"
             :alt="validAddress"
+            :title="validAddress"
             class="w-6 h-6 ml-2"
             v-if="Boolean(validAddress)"
           />
-          <span v-else-if="address && !validAddress" class="w-6 h-6 ml-2"
+          <span v-else-if="address && !validAddress" class="w-6 h-6 ml-2" title="Invalid address"
             >❌</span
           >
         </div>

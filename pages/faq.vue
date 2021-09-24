@@ -67,21 +67,63 @@
         <li class="mt-5"><b>Q:</b> What is the size limit for upload?</li>
         <li>
           <b>A:</b> Web3.Storage have a limit of 32 GiB for each content
-          archive, this means the total size of files in a single upload cannot exceed that
-          limit, This may be increased in the future. There is another limit for
-          individiual file size since browsers cannot encrypt files larger than
-          2 GiB. If your file is larger than this you can split it into multiple
-          parts using a zip archive or similar methods.
+          archive, this means the total size of files in a single upload cannot
+          exceed that limit, This may be increased in the future. There is
+          another limit for individiual file size since browsers cannot encrypt
+          files larger than 2 GiB. If your file is larger than this you can
+          split it into multiple parts using a zip archive or similar methods.
         </li>
         <li class="mt-5">
           <b>Q:</b> Are there any restrictions on what to upload?
         </li>
         <li>
-          <b>A:</b> There are none, UnFile is free to use and modify to suit your
-          needs. However, please don't use it in anything considered immoral.
+          <b>A:</b> There are none, UnFile is free to use and modify to suit
+          your needs. However, please don't use it in anything considered
+          immoral.
         </li>
       </ul>
       <div class="flex flex-wrap justify-center items-center mt-5">
+        <h1 class="text-lg text-center font-semibold">If you like this project and want to see more features added, consider tipping us using these methods</h1>
+        <button
+          @click="lightning = true"
+          class="
+            m-3
+            border-2 border-purple-500
+            text-purple-500
+            px-3
+            py-2
+            rounded-lg
+            font-semibold
+            text-lg
+            focus:outline-none
+            focus:shadow-outline
+            hover:bg-purple-500
+            hover:border-purple-500
+            hover:text-white
+            shadow-lg
+            cursor-pointer
+            transition
+            ease-in
+            duration-300
+            flex
+            justify-center
+            items-center
+          "
+        >
+          Donate via Lightning Network&nbsp;<span
+            class="
+              bg-white
+              w-14
+              h-8
+              rounded-full
+              border-2 border-white
+              flex
+              items-center
+              justify-center
+            "
+            ><img src="@/assets/img/Lightning.svg"
+          /></span>
+        </button>
         <button
           @click="btcQR = true"
           class="
@@ -142,12 +184,25 @@
             ><img src="@/assets/img/XMR.svg"
           /></span>
         </button>
+        <LightningCheckout
+          v-if="lightning"
+          @ok="initInvoice"
+          @close="lightning = false"
+        />
         <PaymentModal
           :address="'bc1qmu6yj6e49wjvf6qgdcf98tmm48f4dxxajxqjga'"
           :currency="'BTC'"
           @close="btcQR = false"
           v-if="btcQR"
           key="btc"
+        />
+        <PaymentModal
+          :address="lightningQr"
+          :currency="'Lightning'"
+          :paymentHash="payment_hash"
+          @close="lightningQr = false"
+          v-if="lightningQr"
+          key="lightning"
         />
         <PaymentModal
           :address="'898swoLtFZ3NqPAAVUpFwf9MVtnyy17MASvyhLstFYDmZ5C4rvSyGSiXvRny5uic2jRsFqWsdfmHGPmapVMhHizL2pWhyEb'"
@@ -172,7 +227,17 @@ export default {
     return {
       btcQR: false,
       xmrQR: false,
+      lightning: false,
+      lightningQr: false,
+      payment_hash: null,
     }
+  },
+  methods: {
+    initInvoice(data) {
+      this.lightning = false
+      this.lightningQr = data.payment_request
+      this.payment_hash = data.payment_hash
+    },
   },
 }
 </script>

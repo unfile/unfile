@@ -1,0 +1,173 @@
+<template>
+  <div
+    class="
+      modal
+      h-screen
+      w-full
+      fixed
+      left-0
+      top-0
+      flex
+      justify-center
+      items-center
+      bg-black bg-opacity-50
+      z-1000
+    "
+  >
+    <!-- modal -->
+    <div
+      class="
+        bg-white
+        rounded
+        shadow-lg
+        w-10/12
+        md:w-1/3
+        flex flex-col
+        justify-center
+        items-center
+      "
+    >
+      <!-- modal body -->
+      <div class="px-10 py-5 flex flex-col justify-center items-start">
+        <label for="amount">Amount (SAT)</label>
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          class="
+            text-base
+            p-2
+            border border-gray-300
+            rounded-lg
+            focus:outline-none
+            focus:border-indigo-500
+            outline-none
+            mb-5
+          "
+          min="10"
+          placeholder="min 10 satoshis"
+          v-model="amount"
+        />
+        <label for="memo">Memo</label>
+        <input
+          type="text"
+          placeholder="optional note"
+          id="memo"
+          name="memo"
+          class="
+            text-base
+            p-2
+            border border-gray-300
+            rounded-lg
+            focus:outline-none
+            focus:border-indigo-500
+            outline-none
+          "
+          v-model="memo"
+        />
+      </div>
+      <p class="text-red-600 p-5 text-center" v-if="error">{{ error }}</p>
+      <div class="flex justify-around items-center w-full p-5">
+        <button
+          class="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-lg text-white"
+          v-if="!loading"
+          @click="submit"
+        >
+          Generate Invoice
+        </button>
+        <Spinner class="h-1 w-1" v-else />
+        <button
+          class="
+            hover:bg-red-600
+            hover:text-white
+            px-4
+            py-2
+            rounded-lg
+            text-red-600
+            border-2 border-red-600
+          "
+          @click="close"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      loading: false,
+      memo: '',
+      amount: null,
+      error: '',
+    }
+  },
+  methods: {
+    submit() {
+      this.error = ''
+      if (!Number(this.amount) || Number(this.amount) < 10) {
+        this.error = 'Amount cannot be less than 10 satoshis'
+        return
+      }
+      this.loading = true
+
+      var myHeaders = new Headers()
+      myHeaders.append('X-Api-Key', 'd97307f305d24dc2944fa397a21c6421')
+      myHeaders.append('Content-Type', 'application/json')
+
+      var raw = JSON.stringify({
+        out: false,
+        amount: Number(this.amount),
+        memo: this.memo || 'Unfile Donation',
+      })
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      }
+
+      fetch('https://lnbits.com/api/v1/payments', requestOptions)
+        .then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((result) => {
+                console.log(result)
+                if (result) {
+                  this.$emit('ok', result)
+                }
+              })
+              .catch((error) => {
+                console.log('error', error)
+                this.error = `${error}`
+              })
+              .finally(() => {
+                this.loading = false
+              })
+          } else {
+            response.text().then((message) => {
+              this.error = `${message}`
+              this.loading = false
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+          this.error = `${error}`
+          this.loading = false
+        })
+    },
+    close() {
+      this.$emit('close')
+    },
+  },
+}
+</script>
+
+<style>
+</style>

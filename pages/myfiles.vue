@@ -104,7 +104,7 @@
             px-4
             tracking-wide
             font-semibold
-            rounded-xl
+            rounded-full
             bg-blue-500
             text-gray-100
             focus:outline-none

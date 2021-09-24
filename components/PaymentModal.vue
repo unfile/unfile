@@ -21,17 +21,31 @@
         rounded
         shadow-lg
         w-10/12
-        md:w-1/3
+        lg:w-1/3
         flex flex-col
         justify-center
         items-center
       "
     >
       <!-- modal body -->
-      <div class="px-10 py-5 cursor-pointer" ref="canvas" :id="`canvas-${currency}`" @click="qrCode.download({ name: 'qr', extension: 'png' });"></div>
-      <div class="text-center select-all break-all px-10 text-sm">{{ address }}</div>
+      <div class="flex justify-center items-center flex-col" v-if="success">
+        <h1 class="text-lg font-semibold text-center text-green-600 mt-5">
+          Payment received, thank you.
+        </h1>
+        <CheckIcon class="w-64 h-64 text-green-500" />
+      </div>
+      <div class="flex justify-center items-center flex-col" v-else>
+        <div
+          class="px-10 py-5 cursor-pointer"
+          ref="canvas"
+          :id="`canvas-${currency}`"
+          @click="qrCode.download({ name: 'qr', extension: 'png' })"
+        ></div>
+        <div class="text-center select-all break-all px-10 text-xs">
+          {{ address }}
+        </div>
+      </div>
       <div class="flex justify-center items-center w-100 p-10">
-        <!-- <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">Cancel</button> -->
         <button
           class="
             bg-blue-600
@@ -56,15 +70,54 @@ export default {
   props: {
     address: '',
     currency: '',
+    paymentHash: '',
   },
   methods: {
     close() {
       this.$emit('close')
     },
+
+    checkLightningPayment() {
+      var myHeaders = new Headers()
+      myHeaders.append('X-Api-Key', 'd97307f305d24dc2944fa397a21c6421')
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      }
+
+      fetch(
+        `https://lnbits.com/api/v1/payments/${this.paymentHash}`,
+        requestOptions
+      )
+        .then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((result) => {
+                console.log(result)
+                if (result.paid) {
+                  this.success = true
+                  clearInterval(this.checkLightningPayment)
+                }
+              })
+              .catch((error) => {
+                console.log('error', error)
+              })
+          } else {
+            console.log(response)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
   },
   data() {
     return {
       qrCode: null,
+      success: false,
     }
   },
   async mounted() {
@@ -91,6 +144,9 @@ export default {
 
     this.qrCode.append(this.$refs.canvas)
     // qrCode.download({ name: "qr", extension: "svg" });
+    if (this.paymentHash) {
+      setInterval(this.checkLightningPayment, 5000)
+    }
   },
 }
 </script>
