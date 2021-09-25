@@ -15,7 +15,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Decentralized & encrypted free file storing and sharing built on Filecoin and IPFS',
+          'Decentralized & encrypted free file storing and sharing built on Filecoin and IPFS with crypto tipping options',
       },
       { name: 'format-detection', content: 'telephone=no' },
       {
