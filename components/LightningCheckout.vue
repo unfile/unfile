@@ -69,7 +69,7 @@
       <p class="text-red-600 p-5 text-center" v-if="error">{{ error }}</p>
       <div class="flex justify-around items-center w-full p-5">
         <button
-          class="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-lg text-white"
+          class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white border-2 border-purple-600"
           v-if="!loading"
           @click="submit"
         >
@@ -121,7 +121,7 @@ export default {
       var raw = JSON.stringify({
         out: false,
         amount: Number(this.amount),
-        memo: this.memo || 'Unfile Donation',
+        memo: this.memo || 'UnFile.io Donation',
       })
 
       var requestOptions = {
