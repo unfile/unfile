@@ -205,37 +205,9 @@
         <label
           class="text-sm font-bold text-gray-500 tracking-wide"
           v-if="showAddress"
-          >Wallet address to receive tips</label
+          >Wallet address or LNUrl to receive tips</label
         >
-        <div
-          class="flex items-center p-2 rounded-lg"
-          :class="
-            !address
-              ? 'border border-gray-300'
-              : Boolean(validAddress)
-              ? 'border border-green-300'
-              : 'border-2 border-red-300'
-          "
-          v-if="showAddress"
-        >
-          <input
-            class="flex-1 text-base focus:outline-none outline-none pr-2"
-            :class="{ 'border-r-2': validAddress }"
-            type="text"
-            placeholder="BTC or XMR address.."
-            v-model="address"
-          />
-          <img
-            :src="require(`@/assets/img/${validAddress}.svg`)"
-            :alt="validAddress"
-            :title="validAddress"
-            class="w-6 h-6 ml-2"
-            v-if="Boolean(validAddress)"
-          />
-          <span v-else-if="address && !validAddress" class="w-6 h-6 ml-2" title="Invalid address"
-            >❌</span
-          >
-        </div>
+        <WalletInput v-if="showAddress" @validated="setAddress" />
       </div>
       <div>
         <button
@@ -262,19 +234,12 @@
         </button>
       </div>
     </form>
-    <Modal
-      :message="errorMsg"
-      v-show="errorMsg"
-      @ok="
-        errorMsg = ''
-      "
-    />
+    <Modal :message="errorMsg" v-show="errorMsg" @ok="errorMsg = ''" />
   </div>
 </template>
 <script>
 import { Password, encryptBlob } from '~/utils/encryption'
 import { formatSize, MAXSIZE, MAX_TOTAL_SIZE } from '~/utils/helpers'
-import WAValidator from '~/utils/validator/wallet_address_validator'
 import Modal from './Modal.vue'
 export default {
   components: { Modal },
@@ -300,25 +265,13 @@ export default {
       encryptedFiles: {},
       totalSize: 0,
       errorMsg: '',
-      validAddress: null,
+      currency: null,
     }
   },
-  watch: {
-    address(val) {
-      this.validateAddress(val)
-    },
-  },
   methods: {
-    async validateAddress(address) {
-      let currencies = ['BTC', 'XMR']
-      for (const c of currencies) {
-        const valid = await WAValidator.validate(address, c)
-        if (valid) {
-          this.validAddress = c
-          return
-        }
-      }
-      this.validAddress = false
+    setAddress(address, currency) {
+      this.address = address
+      this.currency = currency
     },
     highlight(e) {
       // e.preventDefault()
@@ -526,14 +479,14 @@ export default {
         console.log('no file selected')
         return
       }
-      if (this.address && !this.validAddress) {
+      if (this.address && !this.currency) {
         this.errorMsg = `Your tipping address is not recognized a valid format, please add a correct BTC or XMR address.`
         return
       }
       this.uploading = true
       let addresses = []
-      if (this.address && this.validAddress) {
-        addresses.push({ address: this.address, currency: this.validAddress })
+      if (this.address && this.currency) {
+        addresses.push({ address: this.address, currency: this.currency })
       }
       this.$emit('upload', {
         files: this.encryptedFiles,

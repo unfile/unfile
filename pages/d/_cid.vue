@@ -25,57 +25,58 @@
           leave-class="opacity-100 transform scale-100"
           leave-to-class="opacity-0 transform scale-0"
         >
-          <div
-            v-if="status && metadata"
-            class="
-              sm:px-4
-              md:px-16
-              lg:px-24
-              w-full
-              space-y-2
-              mb-4
-              flex flex-wrap
-              items-center
-              justify-between
-            "
-          >
-            <p
+          <div v-if="status && metadata" class="w-full">
+            <div
               class="
-                text-green-500
-                font-semibold
-                text-xl
-                flex
+                sm:px-4
+                md:px-16
+                lg:px-24
+                w-full
+                mb-4
+                flex flex-wrap
                 items-center
-                justify-center
+                justify-between
               "
             >
-              Key accepted&nbsp;<CheckIcon class="w-5 h-5" />
-            </p>
-            <button
-              class="
-                flex
-                justify-center
-                cursor-pointer
-                py-1
-                px-2
-                rounded-lg
-                bg-blue-500
-                text-gray-100
-                focus:outline-none
-                focus:shadow-outline
-                hover:bg-blue-600
-                shadow-lg
-                cursor-pointer
-                transition
-                ease-in
-                duration-300
-                text-sm
-              "
-              @click="saveLink"
-              :disabled="saveText=='Link Saved!'"
-            >
-              {{saveText}}
-            </button>
+              <p
+                class="
+                  text-green-500
+                  font-semibold
+                  text-xl
+                  flex
+                  items-center
+                  justify-center
+                "
+              >
+                Key accepted&nbsp;<CheckIcon class="w-5 h-5" />
+              </p>
+              <button
+                class="
+                  flex
+                  justify-center
+                  cursor-pointer
+                  py-1
+                  px-2
+                  rounded-lg
+                  bg-blue-500
+                  text-gray-100
+                  focus:outline-none
+                  focus:shadow-outline
+                  hover:bg-blue-600
+                  shadow-lg
+                  cursor-pointer
+                  transition
+                  ease-in
+                  duration-300
+                  text-sm
+                "
+                @click="saveLink"
+                :disabled="saveText == 'Link Saved!'"
+              >
+                {{ saveText }}
+              </button>
+            </div>
+            <hr class="w-full" />
           </div>
           <form
             @submit.prevent="getDetails"
@@ -208,54 +209,30 @@
               </tbody>
             </table>
             <div
-              class="flex justify-center items-center my-5"
+              class="flex flex-col justify-center items-center my-5"
               v-if="metadata && metadata.addresses.length > 0"
             >
-              <button
+              <div
                 v-for="address in metadata.addresses"
                 :key="address.currency"
-                @click="showQR = address"
-                class="
-                  my-3
-                  border-2
-                  px-3
-                  py-2
-                  rounded-lg
-                  font-semibold
-                  text-lg
-                  focus:outline-none
-                  focus:shadow-outline
-                  hover:text-white
-                  shadow-lg
-                  cursor-pointer
-                  transition
-                  ease-in
-                  duration-300
-                  flex
-                  justify-center
-                  items-center
-                  bg-white
-                "
-                title="Send tip to the person who uploaded these files"
-                :class="
-                  address.currency == 'BTC'
-                    ? 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:border-yellow-500'
-                    : 'xmrbtn'
-                "
+                class="flex justify-center items-center w-full"
               >
-                Tip Uploader&nbsp;<span
-                  class="bg-white w-8 h-8 rounded-full border-2 border-white"
-                  ><img
-                    :src="require(`@/assets/img/${address.currency}.svg`)"
-                    class=""
-                /></span>
-              </button>
-              <PaymentModal
-                :address="showQR.address"
-                :currency="showQR.currency"
-                @close="showQR = false"
-                v-if="showQR"
-              />
+                <BitcoinButton
+                  :address="address.address"
+                  v-if="address.currency == 'BTC'"
+                  text="Tip Uploader Bitcoin"
+                />
+                <LNUrlButton
+                  :address="address.address"
+                  v-else-if="address.currency == 'Lightning'"
+                  text="Tip Uploader via Lightning"
+                />
+                <MoneroButton
+                  :address="address.address"
+                  v-else-if="address.currency == 'XMR'"
+                  text="Tip Uploader Monero"
+                />
+              </div>
             </div>
           </div>
         </transition>
@@ -400,7 +377,7 @@ export default {
       error: '',
       errorModal: '',
       loadingDetails: false,
-      saveText:'Save Link in My Files'
+      saveText: 'Save Link in My Files',
     }
   },
   async mounted() {
@@ -475,7 +452,7 @@ export default {
       let uploads = localStorage.getItem('unfile-uploads')
       if (uploads) {
         uploads = JSON.parse(uploads) || []
-      }else{
+      } else {
         uploads = []
       }
       uploads.unshift({

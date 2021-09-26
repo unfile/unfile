@@ -139,11 +139,4 @@ export default {
 .min-h-screen-80 {
   min-height: 83vh;
 }
-.xmrbtn{
-  color: #ff6600;
-  border-color: #ff6600;
-}
-.xmrbtn:hover{
-  background-color: #ff6600;
-}
 </style>

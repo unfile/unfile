@@ -82,134 +82,13 @@
           immoral.
         </li>
       </ul>
+      <hr class="w-full mt-3">
       <div class="flex flex-wrap justify-center items-center mt-5">
-        <h1 class="text-lg text-center font-semibold">If you like this project and want to see more features added, consider tipping us using these methods</h1>
-        <button
-          @click="lightning = true"
-          class="
-            m-3
-            border-2 border-purple-600
-            text-purple-600
-            px-3
-            py-2
-            rounded-lg
-            font-semibold
-            text-lg
-            focus:outline-none
-            focus:shadow-outline
-            hover:bg-purple-600
-            hover:border-purple-600
-            hover:text-white
-            shadow-lg
-            cursor-pointer
-            transition
-            ease-in
-            duration-300
-            flex flex-wrap
-            justify-center
-            items-center
-          "
-        >
-          Donate via Lightning Network&nbsp;<span
-            class="
-              bg-white
-              w-14
-              h-8
-              rounded-full
-              border-2 border-white
-              flex
-              items-center
-              justify-center
-            "
-            ><img src="@/assets/img/Lightning.svg"
-          /></span>
-        </button>
-        <button
-          @click="btcQR = true"
-          class="
-            m-3
-            border-2 border-yellow-500
-            text-yellow-500
-            px-3
-            py-2
-            rounded-lg
-            font-semibold
-            text-lg
-            focus:outline-none
-            focus:shadow-outline
-            hover:bg-yellow-500
-            hover:border-yellow-500
-            hover:text-white
-            shadow-lg
-            cursor-pointer
-            transition
-            ease-in
-            duration-300
-            flex
-            justify-center
-            items-center
-          "
-        >
-          Donate Bitcoin&nbsp;<span
-            class="bg-white w-8 h-8 rounded-full border-2 border-white"
-            ><img src="@/assets/img/BTC.svg"
-          /></span>
-        </button>
-        <button
-          @click="xmrQR = true"
-          class="
-            m-3
-            border-2
-            px-3
-            py-2
-            rounded-lg
-            font-semibold
-            text-lg
-            focus:outline-none
-            focus:shadow-outline
-            hover:text-white
-            shadow-lg
-            cursor-pointer
-            transition
-            ease-in
-            duration-300
-            flex
-            justify-center
-            items-center
-            xmrbtn
-          "
-        >
-          Donate Monero&nbsp;<span
-            class="bg-white w-8 h-8 rounded-full border-2 border-white"
-            ><img src="@/assets/img/XMR.svg"
-          /></span>
-        </button>
-        <LightningCheckout
-          v-if="lightning"
-          @ok="initInvoice"
-          @close="lightning = false"
-        />
-        <PaymentModal
-          :address="'bc1qmu6yj6e49wjvf6qgdcf98tmm48f4dxxajxqjga'"
-          :currency="'BTC'"
-          @close="btcQR = false"
-          v-if="btcQR"
-          key="btc"
-        />
-        <PaymentModal
-          :address="lightningQr"
-          :currency="'Lightning'"
-          :paymentHash="payment_hash"
-          @close="lightningQr = false"
-          v-if="lightningQr"
-          key="lightning"
-        />
-        <PaymentModal
-          :address="'898swoLtFZ3NqPAAVUpFwf9MVtnyy17MASvyhLstFYDmZ5C4rvSyGSiXvRny5uic2jRsFqWsdfmHGPmapVMhHizL2pWhyEb'"
-          :currency="'XMR'"
-          @close="xmrQR = false"
-          v-if="xmrQR"
-          key="xmr"
+        <h1 class="text-xl text-center font-semibold text-gray-600 w-full">If you like this project and want to see more features added, consider tipping us using these methods</h1>
+        <BitcoinButton address="bc1qmu6yj6e49wjvf6qgdcf98tmm48f4dxxajxqjga" />
+        <LightningInvoiceButton />
+        <MoneroButton
+          address="898swoLtFZ3NqPAAVUpFwf9MVtnyy17MASvyhLstFYDmZ5C4rvSyGSiXvRny5uic2jRsFqWsdfmHGPmapVMhHizL2pWhyEb"
         />
       </div>
     </div>
@@ -222,22 +101,6 @@ export default {
     return {
       title: `UnFile - FAQ`,
     }
-  },
-  data() {
-    return {
-      btcQR: false,
-      xmrQR: false,
-      lightning: false,
-      lightningQr: false,
-      payment_hash: null,
-    }
-  },
-  methods: {
-    initInvoice(data) {
-      this.lightning = false
-      this.lightningQr = data.payment_request
-      this.payment_hash = data.payment_hash
-    },
   },
 }
 </script>

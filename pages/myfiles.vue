@@ -56,7 +56,7 @@
           v-for="(f, i) in uploads"
           :key="i"
           class="
-            flex flex-wrap
+            flex
             justify-between
             items-center
             border
