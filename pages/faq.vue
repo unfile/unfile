@@ -73,6 +73,24 @@
           files larger than 2 GiB. If your file is larger than this you can
           split it into multiple parts using a zip archive or similar methods.
         </li>
+        <li class="mt-5"><b>Q:</b> How does tipping work?</li>
+        <li>
+          <b>A:</b> You type the address of the wallet where you wish to receive
+          tips and a button will appear to the users with the QR code
+          automatically generated. We currently support <b>BTC</b> and
+          <b>XMR</b> as well as <b>LNUrl-pay</b> protocol. Let us know if you
+          think more should be supported.
+        </li>
+        <li class="mt-5"><b>Q:</b> I have a suggestion, where do I send it?</li>
+        <li>
+          <b>A:</b> Please write any feature requests or suggestion in our
+          <a
+            href="https://github.com/unfile/unfile"
+            target="_external"
+            class="text-blue-500"
+            >GitHub repository</a
+          >
+        </li>
         <li class="mt-5">
           <b>Q:</b> Are there any restrictions on what to upload?
         </li>
@@ -82,9 +100,12 @@
           immoral.
         </li>
       </ul>
-      <hr class="w-full mt-3">
+      <hr class="w-full mt-5" />
       <div class="flex flex-wrap justify-center items-center mt-5">
-        <h1 class="text-xl text-center font-semibold text-gray-600 w-full">If you like this project and want to see more features added, consider tipping us using these methods</h1>
+        <h1 class="text-xl text-center font-semibold text-gray-600 w-full mb-3">
+          If you like this project and want to see more features added, consider
+          tipping us using these methods
+        </h1>
         <BitcoinButton address="bc1qmu6yj6e49wjvf6qgdcf98tmm48f4dxxajxqjga" />
         <LightningInvoiceButton />
         <MoneroButton

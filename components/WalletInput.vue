@@ -56,7 +56,7 @@ export default {
       }
       try {
         const params = await getParams(address)
-        console.log(params)
+        // console.log(params)
         if (params.tag && params.tag == 'payRequest') {
           this.validAddress = 'Lightning'
           this.$emit('validated', address, this.validAddress)
