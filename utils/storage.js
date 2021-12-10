@@ -1,5 +1,5 @@
 // https://github.com/web3-storage/example-image-gallery
-import { Web3Storage } from '~/web3.storage'
+import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
 import { jsonFile, makeGatewayURL } from './helpers'
 import { Password, encryptBlob, decryptBlob } from './encryption'
@@ -92,16 +92,6 @@ export async function getEncryptedMetadata(cid) {
   }
   const encryptedBlob = await res.blob()
   return encryptedBlob
-  // console.log(encryptedBlob)
-  // let blob = await decryptBlob(encryptedBlob, password)
-  // console.log(blob)
-  // let text = await blob.text()
-  // console.log(text)
-  // const metadata = JSON.parse(text)
-  // console.log(metadata)
-  // const gatewayURL = makeGatewayURL(cid, metadata.path)
-  // const uri = `ipfs://${cid}/${metadata.path}`
-  // return { ...metadata, cid, gatewayURL, uri }
 }
 
 export async function checkStatus(cid) {
