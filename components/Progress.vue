@@ -13,7 +13,11 @@
       <div v-if="!cid" key="progress">
         <div class="text-center mb-5">
           <h4 class="text-sm font-bold text-gray-400 tracking-wide">
-            Upload in progress..
+            {{
+              pct > 0
+                ? 'Upload in progress..'
+                : 'Preparing Web3.Storage please wait..'
+            }}
           </h4>
         </div>
         <ProgressBar class="my-10 max-w-sm mx-auto" :pct="pct" />
@@ -70,8 +74,7 @@
               rounded-xl
               bg-blue-500
               text-gray-100
-              focus:outline-none
-              focus:shadow-outline
+              focus:outline-none focus:shadow-outline
               hover:bg-blue-600
               shadow-lg
               cursor-pointer
@@ -133,7 +136,7 @@ export default {
       let uploads = localStorage.getItem('unfile-uploads')
       if (uploads) {
         uploads = JSON.parse(uploads) || []
-      }else{
+      } else {
         uploads = []
       }
       uploads.unshift({
