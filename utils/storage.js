@@ -3,20 +3,18 @@ import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
 import { jsonFile, makeGatewayURL } from './helpers'
 import { Password, encryptBlob, decryptBlob } from './encryption'
-import { create } from 'ipfs-http-client'
 
-////////////////////////////////
-////// Image upload & listing
-////////////////////////////////
 export async function getLinks(ipfsPath) {
-  const url = 'https://dweb.link/api/v0'
-  const ipfs = create({ url })
-
-  const links = []
-  for await (const link of ipfs.ls(ipfsPath)) {
-    links.push(link)
-  }
-  console.log(links)
+  const url = `https://dweb.link/api/v0/ls?arg=${encodeURIComponent(ipfsPath)}`
+  const res = await fetch(url)
+  const data = await res.json()
+  let links = []
+  data.Objects[0].Links.forEach((obj) => {
+    const newObj = Object.fromEntries(
+      Object.entries(obj).map(([k, v]) => [k.toLowerCase(), v])
+    )
+    links.push(newObj)
+  })
   return links
 }
 
