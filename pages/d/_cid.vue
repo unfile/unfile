@@ -100,6 +100,7 @@
                   w-full
                   dark:border-gray-500
                   dark:bg-gray-800
+                  dark:text-white
                 "
                 type="text"
                 required
