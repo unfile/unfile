@@ -33,8 +33,7 @@
             rounded-full
             bg-blue-500
             text-gray-100
-            focus:outline-none
-            focus:shadow-outline
+            focus:outline-none focus:shadow-outline
             hover:bg-blue-600
             shadow-lg
             cursor-pointer
@@ -48,9 +47,9 @@
         </n-link>
       </div>
       <div class="flex flex-col items-center justify-center" v-else>
-        <h1 class="mb-5 text-gray-500">
-          These links are saved in your browser's local storage. Clearing application's cache
-          will remove them.
+        <h1 class="mb-10 text-gray-500">
+          These links are saved in your browser's local storage. Clearing
+          application's cache will remove them.
         </h1>
         <div
           v-for="(f, i) in uploads"
@@ -66,9 +65,16 @@
             w-full
           "
         >
-          <div class="mx-2 break-words font-bold text-gray-600">{{ f.caption }}</div>
-          <div class="break-all mx-2 text-sm select-all">
-            {{ baseUrl }}{{ f.link }}
+          <div class="flex flex-col mx-2">
+            <div class="break-words font-bold text-gray-600">
+              {{ f.caption }}
+            </div>
+            <div
+              class="break-all text-sm select-all"
+              :class="{ 'pt-3': f.caption }"
+            >
+              {{ baseUrl }}{{ f.link }}
+            </div>
           </div>
           <button
             class="
@@ -76,8 +82,7 @@
               text-gray-100
               tracking-wide
               font-semibold
-              focus:outline-none
-              focus:shadow-outline
+              focus:outline-none focus:shadow-outline
               hover:bg-blue-600
               shadow-lg
               cursor-pointer
@@ -107,8 +112,7 @@
             rounded-full
             bg-blue-500
             text-gray-100
-            focus:outline-none
-            focus:shadow-outline
+            focus:outline-none focus:shadow-outline
             hover:bg-blue-600
             shadow-lg
             cursor-pointer
