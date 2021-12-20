@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sm:max-w-lg w-full py-10 px-10 bg-white rounded-xl z-10 shadow-xl"
+    class="sm:max-w-lg w-full py-10 px-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800"
   >
     <transition
       enter-active-class="transition-all delay-500 duration-300 ease-out"
@@ -12,7 +12,7 @@
     >
       <div v-if="!cid" key="progress">
         <div class="text-center mb-5">
-          <h4 class="text-sm font-bold text-gray-400 tracking-wide">
+          <h4 class="text-sm font-bold text-gray-400 tracking-wide dark:text-gray-200">
             {{
               pct > 0
                 ? 'Upload in progress..'
@@ -23,7 +23,7 @@
         <ProgressBar class="my-10 max-w-sm mx-auto" :pct="pct" />
       </div>
       <div v-else key="result">
-        <h4 class="text-md font-bold text-gray-500 tracking-wide mb-3">
+        <h4 class="text-md font-bold text-gray-500 tracking-wide mb-3 dark:text-gray-300">
           Your Link:
         </h4>
         <div
@@ -34,11 +34,12 @@
             space-x-4
             border-2 border-gray-300
             rounded-lg
+            dark:border-gray-600
           "
         >
-          <div class="w-full text-base border-r-2 pr-3 select-all break-all">
+          <div class="w-full text-base border-r-2 pr-3 select-all break-all dark:border-gray-400 dark:text-white">
             {{ baseUrl }}{{ link
-            }}<span class="text-red-500">?key={{ password }}</span>
+            }}<span class="text-red-500 dark:text-red-400">?key={{ password }}</span>
           </div>
           <div class="flex-shrink-0">
             <button

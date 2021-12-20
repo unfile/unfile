@@ -11,7 +11,9 @@
       justify-center
       items-center
       bg-black bg-opacity-50
-      z-1000
+      z-50
+      dark:bg-gray-500
+      dark:bg-opacity-70
     "
   >
     <!-- modal -->
@@ -25,14 +27,15 @@
         flex flex-col
         justify-center
         items-center
+        dark:bg-gray-800
       "
     >
       <!-- modal body -->
       <div class="flex justify-center items-center flex-col" v-if="success">
-        <h1 class="text-lg font-semibold text-center text-green-600 mt-5">
+        <h1 class="text-lg font-semibold text-center text-green-600 mt-5 dark:text-green-400">
           Payment received, thank you.
         </h1>
-        <CheckIcon class="w-64 h-64 text-green-500" />
+        <CheckIcon class="w-64 h-64 text-green-500 dark:text-green-300" />
       </div>
       <div class="flex justify-center items-center flex-col" v-else>
         <div
@@ -41,7 +44,7 @@
           :id="`canvas-${currency}`"
           @click="qrCode.download({ name: 'qr', extension: 'png' })"
         ></div>
-        <div class="text-center select-all break-all px-10 text-xs">
+        <div class="text-center select-all break-all px-10 text-xs dark:text-white">
           {{ address }}
         </div>
       </div>

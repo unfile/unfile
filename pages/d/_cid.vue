@@ -12,7 +12,7 @@
       flex-1
     "
   >
-    <div class="max-w-screen-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl">
+    <div class="max-w-screen-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800">
       <div
         class="flex flex-grow flex-wrap justify-around items-center"
         v-if="!error"
@@ -46,6 +46,7 @@
                   flex
                   items-center
                   justify-center
+                  dark:text-green-300
                 "
               >
                 Key accepted&nbsp;<CheckIcon class="w-5 h-5" />
@@ -76,14 +77,14 @@
                 {{ saveText }}
               </button>
             </div>
-            <hr class="w-full" />
+            <hr class="w-full dark:border-gray-600" />
           </div>
           <form
             @submit.prevent="getDetails"
             class="sm:px-4 md:px-16 lg:px-24 w-full space-y-2 mb-4"
             v-else-if="status"
           >
-            <label class="text-sm font-bold text-gray-500 tracking-wide"
+            <label class="text-sm font-bold text-gray-500 tracking-wide dark:text-gray-200"
               >Enter Decryption Key</label
             >
             <div class="flex items-center space-x-4">
@@ -97,6 +98,8 @@
                   focus:border-indigo-500
                   outline-none
                   w-full
+                  dark:border-gray-500
+                  dark:bg-gray-800
                 "
                 type="text"
                 required
@@ -118,7 +121,7 @@
                   "
                   :class="
                     files.length < 1
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed	shadow'
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed	shadow dark:bg-gray-600'
                       : 'bg-blue-500 text-gray-100 focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300'
                   "
                   type="submit"
@@ -140,7 +143,7 @@
           leave-class="opacity-100 transform scale-100"
           leave-to-class="opacity-0 transform scale-0"
         >
-          <div class="flex flex-col items-center self-start" v-if="status">
+          <div class="flex flex-col items-center self-start dark:text-white" v-if="status">
             <table class="table-auto mt-5">
               <tbody>
                 <tr v-show="files.length > 0">
@@ -245,7 +248,7 @@
           leave-to-class="opacity-0 transform scale-0"
         >
           <div v-if="!status" class="flex flex-col justify-center items-center">
-            <h1 class="text-center mb-3 text-lg text-gray-600 font-semibold">
+            <h1 class="text-center mb-3 text-lg text-gray-600 font-semibold dark:text-gray-200">
               Finding your files..
             </h1>
             <Spinner />
@@ -265,7 +268,7 @@
             :class="{ 'flex-1': metadata }"
           >
             <h1
-              class="text-lg font-bold text-center text-gray-600 mb-3"
+              class="text-lg font-bold text-center text-gray-600 mb-3 dark:text-gray-200"
               v-if="metadata"
             >
               {{ metadata.caption }}
@@ -273,20 +276,20 @@
             <div class="flex flex-col" v-for="(f, i) in files" :key="i">
               <div class="flex items-center flex-wrap">
                 <div class="flex flex-col flex-1 mx-3">
-                  <h1 class="w-full break-all font-semibold text-sm">
+                  <h1 class="w-full break-all font-semibold text-sm dark:text-white">
                     {{
                       metadata && metadata.files
                         ? metadata.files[f.name]
                         : f.name
                     }}
                   </h1>
-                  <p class="text-sm whitespace-nowrap text-gray-500">
+                  <p class="text-sm whitespace-nowrap text-gray-500 dark:text-gray-300">
                     {{ f.size | formatSize }}
                   </p>
                 </div>
                 <div>
                   <SolidLockIcon
-                    class="h-6 w-6 text-gray-400 min-w-min"
+                    class="h-6 w-6 text-gray-400 min-w-min dark:text-gray-200"
                     v-if="!metadata"
                   />
                   <button

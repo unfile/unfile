@@ -6,5 +6,6 @@ module.exports = {
                 'betterhover': {'raw': '(hover: hover)'},
             }
         }
-    }
+    },
+    darkMode: 'media'
 }

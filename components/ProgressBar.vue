@@ -7,6 +7,7 @@
       overflow-hidden
       shadow-inner
       h-6
+      dark:bg-gray-600
     "
   >
     <div

@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
+  <div class="bg-gray-100 min-h-screen dark:bg-gray-700">
     <div class="relative top-0 z-10 w-full">
       <div class="flex justify-between items-center px-5 lg:px-10 py-5">
-        <n-link to="/" class="font-bold text-xl px-4 py-2"
+        <n-link to="/" class="font-bold text-xl px-4 py-2 dark:text-white"
           >UnFile</n-link
         >
         <div class="flex justify-center items-center">
@@ -23,7 +23,7 @@
               text-sm
               text-center
             "
-            :class="$route.name=='faq'?'bg-blue-500 text-white':'text-blue-500'"
+            :class="$route.name=='faq'?'bg-blue-500 text-white':'text-blue-500 dark:text-blue-300'"
             >How it works</n-link
           >
           <n-link
@@ -42,7 +42,7 @@
               text-sm
               text-center
             "
-            :class="$route.name=='donate'?'bg-blue-500 text-white':'text-blue-500'"
+            :class="$route.name=='donate'?'bg-blue-500 text-white':'text-blue-500 dark:text-blue-300'"
             >Donate</n-link
           >
           <n-link
@@ -60,7 +60,7 @@
               text-sm
               text-center
             "
-            :class="$route.name=='myfiles'?'bg-blue-500 text-white':'text-blue-500'"
+            :class="$route.name=='myfiles'?'bg-blue-500 text-white':'text-blue-500 dark:text-blue-300'"
             >My Files</n-link
           >
         </div>
@@ -91,7 +91,7 @@
     </div>
     <div class="relative top-0 z-10 w-full">
       <div class="flex justify-start items-center px-10 py-5">
-        <p class="text-gray-400">v{{ $config.clientVersion }}</p>
+        <p class="text-gray-400 dark:text-gray-200">v{{ $config.clientVersion }}</p>
         <a
             href="https://github.com/unfile/unfile"
             target="_external"
@@ -100,7 +100,7 @@
               py-2
             "
             title="View source code"
-            ><GithubIcon class=""/></a>
+            ><GithubIcon class="dark:bg-white rounded-full border-2"/></a>
       </div>
     </div>
   </div>

@@ -12,12 +12,30 @@
       flex-1
     "
   >
-    <div class="max-w-screen-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl">
+    <div
+      class="
+        max-w-screen-lg
+        w-full
+        p-10
+        bg-white
+        rounded-xl
+        z-10
+        shadow-xl
+        dark:bg-gray-800
+      "
+    >
       <div
         class="flex flex-col items-center justify-center"
         v-if="uploads.length < 1"
       >
-        <h1 class="text-center font-bold text-2xl text-gray-500">
+        <h1
+          class="
+            text-center
+            font-bold
+            text-2xl text-gray-500
+            dark:text-gray-200
+          "
+        >
           No links are saved in your browser
         </h1>
         <n-link
@@ -47,7 +65,7 @@
         </n-link>
       </div>
       <div class="flex flex-col items-center justify-center" v-else>
-        <h1 class="mb-10 text-gray-500">
+        <h1 class="mb-10 text-gray-500 dark:text-gray-200">
           These links are saved in your browser's local storage. Clearing
           application's cache will remove them.
         </h1>
@@ -63,14 +81,15 @@
             rounded
             mb-3
             w-full
+            dark:border-gray-500
           "
         >
           <div class="flex flex-col mx-2">
-            <div class="break-words font-bold text-gray-600">
+            <div class="break-words font-bold text-gray-600 dark:text-gray-200">
               {{ f.caption }}
             </div>
             <div
-              class="break-all text-sm select-all"
+              class="break-all text-sm select-all dark:text-gray-300"
               :class="{ 'pt-3': f.caption }"
             >
               {{ baseUrl }}{{ f.link }}

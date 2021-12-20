@@ -1,7 +1,7 @@
 <template>
-  <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl">
+  <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800">
     <div class="text-center" v-if="selectedFiles.length < 1 && !encrypting">
-      <h1 class="mb-5 text-sm text-gray-400">
+      <h1 class="mb-5 text-sm text-gray-400 dark:text-gray-200">
         Your files will be encrypted locally on your device then sent to a
         decentralized storage.
       </h1>
@@ -22,7 +22,7 @@
               class="
                 flex flex-col
                 rounded-lg
-                border-4 border-dashed
+                border-4 border-dashed dark:border-gray-500
                 w-full
                 h-64
                 p-9
@@ -51,7 +51,7 @@
               >
                 <CloudIcon class="w-20 h-20 text-blue-300 animate-bounce" />
                 <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10"></div>
-                <p class="pointer-none text-gray-500">
+                <p class="pointer-none text-gray-500 dark:text-gray-400">
                   <span class="font-semibold"
                     ><span class="text-sm">Drag and drop</span> files here
                     <br />
@@ -118,13 +118,13 @@
                   selectedFiles.length == Object.keys(encryptedFiles).length &&
                   !encrypting
                 "
-                class="text-green-500 h-30 w-30 min-w-min"
+                class="text-green-500 h-30 w-30 min-w-min dark:text-green-400"
               />
               <div
                 v-else
                 class="text-center flex flex-col justify-around items-center"
               >
-                <h1 class="font-bold text-lg mb-3 text-gray-600">
+                <h1 class="font-bold text-lg mb-3 text-gray-600 dark:text-gray-400">
                   Encrypting<span v-if="selectedFiles.length > 0"
                     >&nbsp;{{ Object.keys(encryptedFiles).length }}/{{
                       selectedFiles.length
@@ -133,7 +133,7 @@
                 </h1>
                 <Spinner />
               </div>
-              <h1 class="font-semibold text-center my-3 text-gray-400">
+              <h1 class="font-semibold text-center my-3 text-gray-400 dark:text-gray-200">
                 Total size:&nbsp;<span v-if="totalSize > 0">{{
                   totalSize | formatSize
                 }}</span>
@@ -153,7 +153,7 @@
             class="text-center mt-5"
             v-if="encrypting || selectedFiles.length > 0"
           >
-            <h4 class="text-sm font-bold text-gray-400 tracking-wide">
+            <h4 class="text-sm font-bold text-gray-400 tracking-wide dark:text-gray-200">
               Decryption Key:
             </h4>
             <h2
@@ -164,6 +164,7 @@
                 tracking-widest
                 my-3
                 select-all
+                dark:text-red-400
               "
               :class="{ 'filter blur-sm': blurPassword }"
               @mouseenter="blurPassword = false"
@@ -171,14 +172,14 @@
             >
               {{ password }}
             </h2>
-            <p class="text-sm text-gray-400">
+            <p class="text-sm text-gray-400 dark:text-gray-200">
               Your files cannot be opened without this key
             </p>
           </div>
         </transition>
       </div>
       <div class="grid grid-cols-1 space-y-2">
-        <label class="text-sm font-bold text-gray-500 tracking-wide"
+        <label class="text-sm font-bold text-gray-500 tracking-wide dark:text-gray-300"
           >Caption</label
         >
         <input
@@ -190,20 +191,23 @@
             focus:outline-none
             focus:border-indigo-500
             outline-none
+            dark:bg-gray-800
+            dark:text-white
+            dark:border-gray-500
           "
           type="text"
           placeholder="Optional"
           v-model="caption"
         />
         <button
-          class="p-2 text-blue-400 font-semibold"
+          class="p-2 text-blue-400 font-semibold dark:text-blue-300"
           v-if="!showAddress"
           @click="showAddress = true"
         >
           + Add Bitcoin or Monero tipping address
         </button>
         <label
-          class="text-sm font-bold text-gray-500 tracking-wide"
+          class="text-sm font-bold text-gray-500 tracking-wide dark:text-gray-300"
           v-if="showAddress"
           >Wallet address or LNUrl to receive tips</label
         >
@@ -213,7 +217,7 @@
         <button
           :disabled="selectedFiles.length < 1 || encrypting || uploading"
           :class="{
-            'bg-gray-100 text-gray-400 cursor-not-allowed	shadow':
+            'bg-gray-100 text-gray-400 cursor-not-allowed	shadow dark:bg-gray-600':
               selectedFiles.length < 1 || encrypting || uploading,
             'bg-blue-500 text-gray-100 focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300':
               !(selectedFiles.length < 1 || encrypting || uploading),

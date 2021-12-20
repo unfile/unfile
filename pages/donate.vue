@@ -12,8 +12,8 @@
       flex-1
     "
   >
-    <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl">
-      <h1 class="text-lg text-center">
+    <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800">
+      <h1 class="text-lg text-center dark:text-white">
         Thank you for supporting this project. These are the currently accepted
         payment methods:
       </h1>

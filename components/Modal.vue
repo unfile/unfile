@@ -11,24 +11,25 @@
       justify-center
       items-center
       bg-black bg-opacity-50
-      z-1000
+      z-50
+      dark:bg-gray-500 dark:bg-opacity-70
     "
   >
     <!-- modal -->
-    <div class="bg-white rounded shadow-lg w-10/12 md:w-1/3">
+    <div class="bg-white rounded shadow-lg w-10/12 md:w-1/3 dark:bg-gray-800">
       <!-- modal header -->
       <div class="px-4 py-2 flex justify-between items-center" v-if="title">
-        <h3 class="font-semibold text-lg">{{ title }}</h3>
-        <button class="text-black close-modal" @click="close">&cross;</button>
+        <h3 class="font-semibold text-lg dark:text-white">{{ title }}</h3>
+        <button class="text-black close-modal dark:text-white" @click="close">&cross;</button>
       </div>
       <!-- modal body -->
-      <div class="px-10 py-5 break-words">
+      <div class="px-10 py-5 break-words dark:text-white">
         {{ message }}
       </div>
       <div class="flex justify-end items-center w-100 px-10 pb-5">
         <!-- <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white mr-1 close-modal">Cancel</button> -->
         <button
-          class="bg-blue-600 hover:bg-blue-700 px-3 py-1 px-2 rounded text-white"
+          class="bg-blue-600 hover:bg-blue-700 px-3 py-1 px-2 rounded text-white darl:bg-blue-500"
           @click="okClicked"
         >
           Ok
