@@ -2,7 +2,7 @@
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 
 import { jsonFile, makeGatewayURL } from './helpers'
-import { Password, encryptBlob, decryptBlob } from './encryption'
+import { Password, encryptBlob } from './encryption'
 
 export async function getLinks(ipfsPath) {
   const url = `https://dweb.link/api/v0/ls?arg=${encodeURIComponent(ipfsPath)}`
@@ -31,7 +31,12 @@ export async function storeFiles(
   callback
 ) {
   // The name for our upload includes a prefix we can use to identify our files later
-  const uploadName = Password.generate(20)
+  let uploadName
+  if (process.env.NAME_PREFIX) {
+    uploadName = `${process.env.NAME_PREFIX} | ${Password.generate(20)}`
+  } else {
+    uploadName = Password.generate(20)
+  }
 
   // We store some metadata about the image alongside the image file.
   // The metadata includes the file path, which we can use to generate
