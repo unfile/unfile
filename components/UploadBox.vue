@@ -324,11 +324,15 @@ export default {
     },
     highlight(e) {
       // e.preventDefault()
+      this.$refs.dropArea.classList.remove('dark:border-gray-500')
       this.$refs.dropArea.classList.add('border-red-500')
+      this.$refs.dropArea.classList.add('dark:border-red-400')
     },
     unhighlight(e) {
       // e.preventDefault()
       this.$refs.dropArea.classList.remove('border-red-500')
+      this.$refs.dropArea.classList.remove('dark:border-red-400')
+      this.$refs.dropArea.classList.add('dark:border-gray-500')
     },
     reset() {
       this.selectedFiles = []
