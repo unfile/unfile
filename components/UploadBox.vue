@@ -1,5 +1,16 @@
 <template>
-  <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800">
+  <div
+    class="
+      sm:max-w-lg
+      w-full
+      p-10
+      bg-white
+      rounded-xl
+      z-10
+      shadow-xl
+      dark:bg-gray-800
+    "
+  >
     <div class="text-center" v-if="selectedFiles.length < 1 && !encrypting">
       <h1 class="mb-5 text-sm text-gray-400 dark:text-gray-200">
         Your files will be encrypted locally on your device then sent to a
@@ -22,7 +33,8 @@
               class="
                 flex flex-col
                 rounded-lg
-                border-4 border-dashed dark:border-gray-500
+                border-4 border-dashed
+                dark:border-gray-500
                 w-full
                 h-64
                 p-9
@@ -67,8 +79,7 @@
                       text-gray-100
                       tracking-wide
                       font-semibold
-                      focus:outline-none
-                      focus:shadow-outline
+                      focus:outline-none focus:shadow-outline
                       hover:bg-blue-600
                       shadow-lg
                       cursor-pointer
@@ -124,7 +135,15 @@
                 v-else
                 class="text-center flex flex-col justify-around items-center"
               >
-                <h1 class="font-bold text-lg mb-3 text-gray-600 dark:text-gray-400">
+                <h1
+                  class="
+                    font-bold
+                    text-lg
+                    mb-3
+                    text-gray-600
+                    dark:text-gray-400
+                  "
+                >
                   Encrypting<span v-if="selectedFiles.length > 0"
                     >&nbsp;{{ Object.keys(encryptedFiles).length }}/{{
                       selectedFiles.length
@@ -133,7 +152,15 @@
                 </h1>
                 <Spinner />
               </div>
-              <h1 class="font-semibold text-center my-3 text-gray-400 dark:text-gray-200">
+              <h1
+                class="
+                  font-semibold
+                  text-center
+                  my-3
+                  text-gray-400
+                  dark:text-gray-200
+                "
+              >
                 Total size:&nbsp;<span v-if="totalSize > 0">{{
                   totalSize | formatSize
                 }}</span>
@@ -153,7 +180,15 @@
             class="text-center mt-5"
             v-if="encrypting || selectedFiles.length > 0"
           >
-            <h4 class="text-sm font-bold text-gray-400 tracking-wide dark:text-gray-200">
+            <h4
+              class="
+                text-sm
+                font-bold
+                text-gray-400
+                tracking-wide
+                dark:text-gray-200
+              "
+            >
               Decryption Key:
             </h4>
             <h2
@@ -179,7 +214,14 @@
         </transition>
       </div>
       <div class="grid grid-cols-1 space-y-2">
-        <label class="text-sm font-bold text-gray-500 tracking-wide dark:text-gray-300"
+        <label
+          class="
+            text-sm
+            font-bold
+            text-gray-500
+            tracking-wide
+            dark:text-gray-300
+          "
           >Caption</label
         >
         <input
@@ -188,12 +230,9 @@
             p-2
             border border-gray-300
             rounded-lg
-            focus:outline-none
-            focus:border-indigo-500
+            focus:outline-none focus:border-indigo-500
             outline-none
-            dark:bg-gray-800
-            dark:text-white
-            dark:border-gray-500
+            dark:bg-gray-800 dark:text-white dark:border-gray-500
           "
           type="text"
           placeholder="Optional"
@@ -207,7 +246,13 @@
           + Add Bitcoin or Monero tipping address
         </button>
         <label
-          class="text-sm font-bold text-gray-500 tracking-wide dark:text-gray-300"
+          class="
+            text-sm
+            font-bold
+            text-gray-500
+            tracking-wide
+            dark:text-gray-300
+          "
           v-if="showAddress"
           >Wallet address or LNUrl to receive tips</label
         >
@@ -293,11 +338,22 @@ export default {
     },
     checkFiles(files) {
       let total = 0
+      let bufArray = []
+      bufArray.push(new Uint8Array(1 * 1024 * 1024)) // 1 mb for metadata
+
       for (const file of files) {
+        try {
+          let test = new Uint8Array(file.size)
+          bufArray.push(test)
+        } catch (e) {
+          this.errorMsg = `Files are larger than what your browser memory allows to encrypt, please try another browser or free some memory.`
+          this.reset()
+          return false
+        }
         if (file.size > MAXSIZE) {
           this.errorMsg = `The file ${
             f.fullPath || f.name
-          } is larger than the allowed single file size, please split it into parts or try another file.`
+          } is larger than the allowed single file size, please split it into parts.`
           this.reset()
           return false
         }
