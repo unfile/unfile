@@ -288,7 +288,7 @@
 </template>
 <script>
 import { Password, encryptBlob } from '~/utils/encryption'
-import { formatSize, MAX_TOTAL_SIZE } from '~/utils/helpers'
+import { formatSize, MAXSIZE, MAX_TOTAL_SIZE } from '~/utils/helpers'
 import Modal from './Modal.vue'
 export default {
   components: { Modal },
@@ -351,6 +351,13 @@ export default {
           bufArray.push(test)
         } catch (e) {
           this.errorMsg = `Files are larger than what your browser memory allows to encrypt, please try another browser or free some memory.`
+          this.reset()
+          return false
+        }
+        if (file.size > MAXSIZE) {
+          this.errorMsg = `The file ${
+            file.fullPath || file.name
+          } is larger than the allowed single file size, please split it into parts.`
           this.reset()
           return false
         }
