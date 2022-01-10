@@ -74,7 +74,7 @@
       </p>
       <p v-if="error" class="dark:text-white p-4 text-center">
         Could not generate invoice, please use this external link instead<br /><a
-          href="https://legend.lnbits.com/tipjar/58"
+          href="https://legend.lnbits.com/tipjar/59"
           class="text-blue-500 dark:text-blue-300"
           target="_external"
           >https://legend.lnbits.com/tipjar/59</a
