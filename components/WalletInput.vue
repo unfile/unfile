@@ -1,16 +1,16 @@
 <template>
   <div
-    class="flex items-center p-2 rounded-lg"
+    class="flex items-center p-2 rounded-lg outline-none dark:bg-gray-800 dark:text-white dark:border-gray-500"
     :class="
       !address
         ? 'border border-gray-300'
         : validAddress == false
-        ? 'border-2 border-red-300'
-        : 'border border-green-300'
+          ? 'border-2 border-red-300'
+          : 'border border-green-300'
     "
   >
     <input
-      class="flex-1 text-base focus:outline-none outline-none pr-2"
+      class="flex-1 text-base focus:outline-none outline-none pr-2 dark:bg-gray-800 dark:text-white dark:border-gray-500"
       :class="{ 'border-r-2': validAddress }"
       type="text"
       placeholder="BTC or XMR or LNUrlp address.."
@@ -23,12 +23,7 @@
       class="h-6 ml-2"
       v-if="Boolean(validAddress)"
     />
-    <span
-      v-else-if="address && validAddress == false"
-      class="h-6 ml-2"
-      title="Invalid address"
-      >❌</span
-    >
+    <span v-else-if="address && validAddress == false" class="h-6 ml-2" title="Invalid address">❌</span>
   </div>
 </template>
 

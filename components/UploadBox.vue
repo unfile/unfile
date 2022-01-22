@@ -230,7 +230,6 @@
             p-2
             border border-gray-300
             rounded-lg
-            focus:outline-none focus:border-indigo-500
             outline-none
             dark:bg-gray-800 dark:text-white dark:border-gray-500
           "
