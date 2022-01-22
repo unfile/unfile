@@ -1,40 +1,16 @@
 <template>
   <div
-    class="
-      modal
-      h-screen
-      w-full
-      fixed
-      left-0
-      top-0
-      flex
-      justify-center
-      items-center
-      bg-black bg-opacity-50
-      z-50
-      dark:bg-gray-500
-      dark:bg-opacity-70
-    "
+    class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 z-50 dark:bg-gray-500 dark:bg-opacity-70"
   >
     <!-- modal -->
     <div
-      class="
-        bg-white
-        rounded
-        shadow-lg
-        w-10/12
-        lg:w-1/3
-        flex flex-col
-        justify-center
-        items-center
-        dark:bg-gray-800
-      "
+      class="bg-white rounded shadow-lg w-10/12 lg:w-1/3 flex flex-col justify-center items-center dark:bg-gray-800"
     >
       <!-- modal body -->
       <div class="flex justify-center items-center flex-col" v-if="success">
-        <h1 class="text-lg font-semibold text-center text-green-600 mt-5 dark:text-green-400">
-          Payment received, thank you.
-        </h1>
+        <h1
+          class="text-lg font-semibold text-center text-green-600 mt-5 dark:text-green-400"
+        >Payment received, thank you.</h1>
         <CheckIcon class="w-64 h-64 text-green-500 dark:text-green-300" />
       </div>
       <div class="flex justify-center items-center flex-col" v-else>
@@ -44,25 +20,13 @@
           :id="`canvas-${currency}`"
           @click="qrCode.download({ name: 'qr', extension: 'png' })"
         ></div>
-        <div class="text-center select-all break-all px-10 text-xs dark:text-white">
-          {{ address }}
-        </div>
+        <div class="text-center select-all break-all px-10 text-xs dark:text-white">{{ address }}</div>
       </div>
       <div class="flex justify-center items-center w-100 p-10">
         <button
-          class="
-            bg-blue-600
-            hover:bg-blue-700
-            px-3
-            py-1
-            px-2
-            rounded
-            text-white
-          "
+          class="bg-blue-600 hover:bg-blue-700 px-3 py-1 px-2 rounded text-white"
           @click="close"
-        >
-          Close
-        </button>
+        >Close</button>
       </div>
     </div>
   </div>
@@ -91,7 +55,7 @@ export default {
       }
 
       fetch(
-        `https://lnbits.com/api/v1/payments/${this.paymentHash}`,
+        `https://legend.lnbits.com/api/v1/payments/${this.paymentHash}`,
         requestOptions
       )
         .then((response) => {

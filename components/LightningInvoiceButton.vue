@@ -40,11 +40,28 @@
         ><img src="@/assets/img/Lightning.svg"
       /></span>
     </button>
+    <transition
+      enter-active-class="transition-all duration-500 ease"
+      leave-active-class="transition-all duration-500 ease"
+      enter-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
     <LightningCheckout
       v-if="lightning"
       @ok="initInvoice"
       @close="lightning = false"
     />
+    </transition>
+    <transition
+      enter-active-class="transition-all delay-500 duration-500 ease"
+      leave-active-class="transition-all duration-500 ease"
+      enter-class="opacity-100"
+      enter-to-class="opacity-100"
+      leave-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
     <PaymentModal
       :address="lightningQr"
       :currency="'Lightning'"
@@ -53,6 +70,7 @@
       v-if="lightningQr"
       key="lightning"
     />
+    </transition>
   </div>
 </template>
 
