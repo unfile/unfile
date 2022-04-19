@@ -74,6 +74,7 @@ export default {
   build: {},
   publicRuntimeConfig: {
     clientVersion: pkg.version,
+    paypalClientId: process.env.PAYPAL_CLIENT_ID
   },
   generate: {
     fallback: true,

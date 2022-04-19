@@ -1,16 +1,6 @@
 <template>
   <div
-    class="
-      md:py-12
-      px-4
-      sm:px-6
-      lg:px-8
-      relative
-      flex flex-col
-      items-center
-      justify-center
-      flex-1
-    "
+    class="md:py-12 px-4 sm:px-6 lg:px-8 relative flex flex-col items-center justify-center flex-1"
   >
     <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 shadow-xl dark:bg-gray-800">
       <h1 class="text-lg text-center dark:text-white">
@@ -23,6 +13,7 @@
         <MoneroButton
           address="898swoLtFZ3NqPAAVUpFwf9MVtnyy17MASvyhLstFYDmZ5C4rvSyGSiXvRny5uic2jRsFqWsdfmHGPmapVMhHizL2pWhyEb"
         />
+        <PaypalButton />
       </div>
     </div>
   </div>

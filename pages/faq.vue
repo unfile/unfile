@@ -66,7 +66,7 @@
         </li>
         <li class="mt-5 dark:text-gray-200"><b>Q:</b> What is the size limit for upload?</li>
         <li class="dark:text-gray-200">
-          <b>A:</b> Web3.Storage have a limit of 32 GiB for each content
+          <b>A:</b> Web3.Storage have a limit of 31 GiB for each content
           archive, this means the total size of files in a single upload cannot
           exceed that limit, This may be increased in the future. There is
           another limit for individiual file size since browsers cannot encrypt
@@ -111,6 +111,7 @@
         <MoneroButton
           address="898swoLtFZ3NqPAAVUpFwf9MVtnyy17MASvyhLstFYDmZ5C4rvSyGSiXvRny5uic2jRsFqWsdfmHGPmapVMhHizL2pWhyEb"
         />
+        <PaypalButton />
       </div>
     </div>
   </div>

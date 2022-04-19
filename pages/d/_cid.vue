@@ -371,6 +371,11 @@ import {
 } from '~/utils/storage'
 import { decryptBlob } from '~/utils/encryption'
 export default {
+  head() {
+    return {
+      title: `UnFile - Download & Decrypt`,
+    }
+  },
   data() {
     return {
       status: null,
