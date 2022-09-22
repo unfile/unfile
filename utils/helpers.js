@@ -4,7 +4,7 @@ export const MAX_TOTAL_SIZE = Number(
 ) // using 2 MiB for metadata
 export const MAXSIZE = Number(process.env.MAXSIZE || 2 * 1024 * 1024 * 1024 - 1)
 export function makeGatewayURL(cid, path) {
-  return `https://${cid}.ipfs.dweb.link/${encodeURIComponent(path)}`
+  return `https://${cid}.ipfs.w3s.link/${encodeURIComponent(path)}`
 }
 
 export function jsonFile(filename, obj) {
