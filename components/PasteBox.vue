@@ -1,6 +1,6 @@
 <template>
   <div class="
-      sm:max-w-lg
+      md:max-w-4xl
       w-full
       px-10
       pb-10
@@ -12,7 +12,6 @@
       dark:bg-gray-800
     ">
     <div class="grid grid-cols-2 divide-x dark:divide-gray-300 text-gray-500 dark:text-gray-300 font-bold p-5 mb-3">
-      <div class="text-center">Upload Files</div>
       <div class="text-center">
         <n-link class="
             rounded-full
@@ -25,8 +24,9 @@
             betterhover:hover:bg-blue-500
             betterhover:hover:text-white
             text-center
-           text-blue-500 dark:text-blue-300" to="/paste">Paste Text →</n-link>
+           text-blue-500 dark:text-blue-300" to="/">← Upload Files</n-link>
       </div>
+      <div class="text-center">Paste Text</div>
     </div>
     <div class="text-center" v-if="selectedFiles.length < 1 && !encrypting">
       <h1 class="mb-5 text-sm text-gray-400 dark:text-gray-200">
@@ -37,63 +37,14 @@
     <form class="space-y-3">
       <div class="grid grid-cols-1 space-y-2">
         <div class="flex items-center justify-center w-full">
-          <transition enter-active-class="transition-all delay-300 duration-300 ease"
-            leave-active-class="transition-all duration-300 ease" enter-class="opacity-0 transform scale-0"
-            enter-to-class="opacity-100 transform scale-100" leave-class="opacity-100 transform scale-100"
-            leave-to-class="opacity-0 transform scale-0">
-            <div id="drop-area" class="
-                flex flex-col
-                rounded-lg
-                border-4 border-dashed
-                dark:border-gray-500
-                w-full
-                h-64
-                p-9
-                group
-                text-center
-              " @dragenter.prevent="highlight" @dragover.prevent="highlight" @dragleave.prevent="unhighlight"
-              @drop.prevent="
-                unhighlight($event)
-                fileDropped($event)
-              " ref="dropArea" v-show="!encrypting && selectedFiles.length < 1">
-              <div class="
-                  h-full
-                  w-full
-                  text-center
-                  flex flex-col
-                  items-center
-                  justify-center
-                ">
-                <CloudIcon class="w-20 h-20 text-blue-300 animate-bounce" />
-                <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10"></div>
-                <p class="pointer-none text-gray-500 dark:text-gray-400">
-                  <span class="font-semibold"><span class="text-sm">Drag and drop</span> files here
-                    <br />
-                    or<br /></span>
-                  <label for="file-input" class="
-                      w-full
-                      flex
-                      justify-center
-                      bg-blue-500
-                      text-gray-100
-                      tracking-wide
-                      font-semibold
-                      focus:outline-none focus:shadow-outline
-                      hover:bg-blue-600
-                      shadow-lg
-                      cursor-pointer
-                      transition
-                      ease-in
-                      duration-300
-                      p-2
-                      rounded-lg
-                      mt-2
-                    ">Click to Select</label>
-                  <input type="file" id="file-input" class="hidden" @change="fileSelected" multiple />
-                </p>
-              </div>
-            </div>
-          </transition>
+          <textarea class="w-full text-base
+            p-2
+            border border-gray-300
+            rounded-lg
+            outline-none
+            dark:bg-gray-800 dark:text-white dark:border-gray-500 overflow-hidden break-words resize-none textarea"
+            placeholder="Type or Paste what you want here.." v-model="textInput" ref="textArea"
+            style="height: 200px;"></textarea>
           <transition enter-active-class="transition-all delay-300 duration-300 ease"
             leave-active-class="transition-all duration-300 ease" enter-class="opacity-0 transform scale-0"
             enter-to-class="opacity-100 transform scale-100" leave-class="opacity-100 transform scale-100"
@@ -253,6 +204,15 @@ export default {
       totalSize: 0,
       errorMsg: '',
       currency: null,
+      textInput: ''
+    }
+  },
+  watch: {
+    textInput(val) {
+      console.log(Math.max(parseFloat(this.$refs.textArea.scrollHeight), parseFloat(this.$refs.textArea.style.height)))
+      this.$refs.textArea.style.height = 'auto'
+      this.$refs.textArea.style.height = '200px'
+      this.$refs.textArea.style.height = Math.max(parseFloat(this.$refs.textArea.scrollHeight), parseFloat(this.$refs.textArea.style.height)) + "px";
     }
   },
   methods: {
@@ -502,5 +462,10 @@ export default {
 .has-mask {
   position: absolute;
   clip: rect(10px, 150px, 130px, 10px);
+}
+
+.textarea {
+  min-height: 200px;
+  line-height: 20px;
 }
 </style>
