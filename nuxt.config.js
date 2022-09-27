@@ -3,7 +3,7 @@ import pkg from './package.json'
 export default {
   target: 'static',
   ssr: false,
-  modern:'client',
+  modern: 'client',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -83,6 +83,6 @@ export default {
     hostname: 'https://unfile.io',
     gzip: true,
     exclude: ['/d', '/d/**'],
-    routes: ['/donate', '/faq'],
+    routes: ['/donate', '/faq', '/paste'],
   },
 }
