@@ -25,7 +25,7 @@
             betterhover:hover:bg-blue-500
             betterhover:hover:text-white
             text-center
-           text-blue-500 dark:text-blue-300" to="/paste">Paste Text →</n-link>
+            text-blue-500 dark:text-blue-300" to="/paste">Paste Text →</n-link>
       </div>
     </div>
     <div class="text-center" v-if="selectedFiles.length < 1 && !encrypting">
@@ -493,14 +493,8 @@ export default {
         password: this.password,
         caption: this.caption,
         addresses: addresses,
-      })
+      }, false)
     },
   },
 }
 </script>
-<style>
-.has-mask {
-  position: absolute;
-  clip: rect(10px, 150px, 130px, 10px);
-}
-</style>

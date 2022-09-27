@@ -1,12 +1,12 @@
 {
   "name": "UnFile",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider nuxt build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider nuxt start",
+    "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",
@@ -19,7 +19,9 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.0",
+    "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^9.5.1",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2"
   }

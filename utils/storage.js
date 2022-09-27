@@ -28,7 +28,8 @@ export async function storeFiles(
   caption,
   addresses,
   version,
-  callback
+  callback,
+  isText
 ) {
   // The name for our upload includes a prefix we can use to identify our files later
   let uploadName
@@ -43,6 +44,7 @@ export async function storeFiles(
   // a URL to the full image.
   let metadata = {
     files: {},
+    text: isText,
     caption,
     addresses,
   }
@@ -107,6 +109,9 @@ export async function checkStatus(cid) {
 export async function getFileStream(cid, filename, callback, arg) {
   const url = makeGatewayURL(cid, filename)
   let response = await fetch(url)
+  if (!response.ok){
+    throw 'Could not fetch file, try again.'
+  }
   const reader = response.body.getReader()
   const contentLength = response.headers.get('Content-Length')
   console.log(contentLength)
