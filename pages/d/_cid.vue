@@ -203,7 +203,8 @@
             </h1>
             <div class="flex flex-col dark:text-white text-base w-full p-2
                   border border-gray-300 dark:border-gray-500" v-if="metadata && metadata.text">
-              <pre class="overflow-hidden break-words whitespace-pre-wrap">{{textOutput}}</pre>
+              <pre class="overflow-hidden break-words whitespace-pre-wrap" v-if="textOutput">{{textOutput}}</pre>
+              <Spinner v-else />
             </div>
             <div class="flex flex-col" v-for="(f, i) in files" :key="i" v-else>
               <div class="flex items-center flex-wrap">

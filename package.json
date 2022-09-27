@@ -1,6 +1,6 @@
 {
   "name": "UnFile",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
