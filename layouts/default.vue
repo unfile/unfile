@@ -66,10 +66,12 @@
         </div>
       </div>
     </div>
+    
     <div
       v-if="checked"
-      class="flex justify-center items-center flex-grow min-h-screen-80"
+      class="flex flex-col justify-center items-center flex-grow min-h-screen-80"
     >
+      <Warning />
       <Security v-if="!(secure || ['faq', 'donate'].indexOf($route.name) != -1 )" />
       <Nuxt v-else />
     </div>
@@ -107,23 +109,26 @@
 </template>
 
 <script>
+import Warning from '~/components/Warning.vue'
 export default {
-  data() {
-    return {
-      secure: true,
-      checked: false,
-    }
-  },
-  async mounted() {
-    if (!window.isSecureContext) {
-      // Page is a secure context so service workers are now available
-      console.log('not secure context detected')
-      this.secure = false
-    } else {
-      console.log('secure')
-    }
-    this.checked = true
-  },
+    data() {
+        return {
+            secure: true,
+            checked: false,
+        };
+    },
+    async mounted() {
+        if (!window.isSecureContext) {
+            // Page is a secure context so service workers are now available
+            console.log("not secure context detected");
+            this.secure = false;
+        }
+        else {
+            console.log("secure");
+        }
+        this.checked = true;
+    },
+    components: { Warning }
 }
 </script>
 

@@ -15,7 +15,7 @@
     "js-lnurl": "^0.2.5",
     "nuxt": "^2.15.7",
     "qr-code-styling": "^1.6.0-rc.1",
-    "web3.storage": "^3.5.1"
+    "web3.storage": "^4.4.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.0",
